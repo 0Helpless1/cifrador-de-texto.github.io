@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/Style.css">
+    <title>Encriptador y Desencriptador de Texto</title>
+</head>
+<body>
+
+    <h1>Encriptador y Descifrador de Texto</h1>
+
+    <div class="container">
+        <textarea id="textInput" placeholder="Ingresa tu texto aquí..."></textarea>
+
+        <div class="buttons">
+            <button id="encryptBtn" onclick="encryptText()">Encriptar</button>
+            <button id="decryptBtn" onclick="decryptText()">Descifrar</button>
+            <button id="copyBtn" onclick="copyText()" disabled>Copiar</button>
+        </div>
+
+        <div>
+            <div class="result-label">Resultado:</div>
+            <textarea id="textOutput" readonly placeholder="El resultado aparecerá aquí..."></textarea>
+        </div>
+    </div>
+
+    <div class="footer">
+        Hecho por JUAN DIEGO EUSSE PATIÑO - 2024 Encriptador de Texto. &copy;Todos los derechos reservados.
+        
+    </div>
+
+    <script>
+        function encryptText() {
+            let text = document.getElementById("textInput").value;
+            if (validateText(text)) {
+                let encryptedText = text
+                    .replace(/e/g, "enter")
+                    .replace(/i/g, "imes")
+                    .replace(/a/g, "ai")
+                    .replace(/o/g, "ober")
+                    .replace(/u/g, "ufat");
+                document.getElementById("textOutput").value = encryptedText;
+                document.getElementById("copyBtn").disabled = false;
+            } else {
+                alert("Por favor, ingresa solo letras minúsculas sin acentos ni caracteres especiales.");
+            }
+        }
+
+        function decryptText() {
+            let text = document.getElementById("textInput").value;
+            if (validateText(text)) {
+                let decryptedText = text
+                    .replace(/enter/g, "e")
+                    .replace(/imes/g, "i")
+                    .replace(/ai/g, "a")
+                    .replace(/ober/g, "o")
+                    .replace(/ufat/g, "u");
+                document.getElementById("textOutput").value = decryptedText;
+                document.getElementById("copyBtn").disabled = false;
+            } else {
+                alert("Por favor, ingresa solo letras minúsculas sin acentos ni caracteres especiales.");
+            }
+        }
+
+        function copyText() {
+            let text = document.getElementById("textOutput");
+            text.select();
+            text.setSelectionRange(0, 99999); // Para dispositivos móviles
+            document.execCommand("copy");
+            alert("¡Texto copiado al portapapeles!");
+        }
+
+        function validateText(text) {
+            const regex = /^[a-z\s]+$/;
+            return regex.test(text);
+        }
+    </script>
+</body>
+</html>
+
